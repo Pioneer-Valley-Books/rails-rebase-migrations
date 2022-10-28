@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Gem::Specification.new do |spec|
-  spec.name = 'rebase-dumper'
+  spec.name = 'rails-rebase-migrations'
   spec.version = '1.0.0'
   spec.licenses = ['MIT']
   spec.summary = 'Rebase Rails migrations to be the latest'
