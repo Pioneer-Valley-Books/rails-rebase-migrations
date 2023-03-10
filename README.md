@@ -6,7 +6,7 @@ to have the latest timestamp.
 ## Installation
 
 ```console
-$ bundle add rebase-migrations --group=development,test
+$ bundle add rails-rebase-migrations --group=development,test
 ```
 
 ## Scenario
