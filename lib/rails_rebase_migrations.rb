@@ -3,6 +3,7 @@
 require 'open3'
 require 'optparse'
 require 'shellwords'
+require 'time'
 
 class RebaseMigrations
   SKIP_REBASE = '_skip_rebase_'
@@ -10,22 +11,27 @@ class RebaseMigrations
   MIGRATIONS_DIR = 'db/migrate/'
   MIGRATION_NAME_RE = /\A(\d+)(.*)\z/
 
+  TIME_FORMAT = '%Y%m%d%H%M%S'
+
   def main
     ref, options = parse_args
 
     out = subprocess('git', 'ls-files', '--', MIGRATIONS_DIR)
     all_migrations = out.lines(chomp: true).to_a.sort
 
-    out = subprocess('git', 'diff', '--diff-filter=A', '--name-only', ref, '--', MIGRATIONS_DIR)
-    new_migrations = out.lines(chomp: true).to_a.sort
+    out = subprocess('git', 'ls-tree', '--name-only', ref, '--', MIGRATIONS_DIR)
+    ref_migrations = out.lines(chomp: true).to_a.sort
 
-    starting_index = all_migrations.length - new_migrations.length
+    starting_index = ref_migrations.length
 
-    now = Time.now.to_i
+    basename = File.basename(ref_migrations.last)
+    match = MIGRATION_NAME_RE.match(basename)
+    last_timestamp = match[1]
+    now = [Time.now.utc, Time.strptime("#{last_timestamp}Z", "#{TIME_FORMAT}%Z")].max.to_i
 
-    return if new_migrations.empty?
+    all_migrations.each do |path|
+      next if ref_migrations.include?(path)
 
-    new_migrations.each do |path|
       basename = File.basename(path)
       match = MIGRATION_NAME_RE.match(File.basename(path))
       migration_timestamp = match[1]
@@ -52,12 +58,13 @@ class RebaseMigrations
           exit 1
         end
       else
-        new_timestamp = Time.at(now).utc.strftime('%Y%m%d%H%M%S')
-        new_migration_name = "#{new_timestamp}#{migration_name_base}"
-        subprocess('git', 'mv', path, "#{MIGRATIONS_DIR}#{new_migration_name}")
         # Add 120s so the new migrations maintain the same order and provides
         # room between the migrations to inject new ones.
         now += 120
+
+        new_timestamp = Time.at(now).strftime(TIME_FORMAT)
+        new_migration_name = "#{new_timestamp}#{migration_name_base}"
+        subprocess('git', 'mv', path, "#{MIGRATIONS_DIR}#{new_migration_name}")
       end
     end
 
