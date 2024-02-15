@@ -1,0 +1,31 @@
+# Please see the documentation for all configuration options:
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - package-ecosystem: bundler
+    directory: /
+    schedule:
+      interval: weekly
+      day: sunday
+    allow:
+      - dependency-type: all
+    commit-message:
+      prefix: "Bundler Updates: "
+    versioning-strategy: lockfile-only
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: sunday
+    commit-message:
+      prefix: "GitHub Actions Updates: "
+    groups:
+      all-dependencies:
+        patterns:
+          - "*"
