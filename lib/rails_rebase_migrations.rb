@@ -42,15 +42,12 @@ class RebaseMigrations
             Migration #{basename} is out of order. It should come after
             pre-existing migrations. To fix, run the command:
 
-              $ ./tools/rebase-migrations
+              $ bundle exec rebase-migrations
 
             If the migration is intentionally out of order, add the magic
             string "#{SKIP_REBASE}" to the beginning of the migration name:
 
               $ git mv #{path} #{MIGRATIONS_DIR}#{skip_migration_name}
-
-            If this pull request is merging across branches prod, staging, or
-            main, then add the "review-merge" label.
           MSG
 
           exit 1
