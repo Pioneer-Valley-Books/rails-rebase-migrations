@@ -8,7 +8,7 @@ class RebaseMigrations
   SKIP_REBASE = '_skip_rebase_'
 
   MIGRATIONS_DIR = 'db/migrate/'
-  MIGRATION_NAME_RE = /^(\d+)(.*)$/
+  MIGRATION_NAME_RE = /\A(\d+)(.*)\z/
 
   def main
     ref, options = parse_args
