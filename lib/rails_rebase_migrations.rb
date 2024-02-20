@@ -14,10 +14,10 @@ class RebaseMigrations
     ref, options = parse_args
 
     out = subprocess('git', 'ls-files', '--', MIGRATIONS_DIR)
-    all_migrations = out.split("\n").to_a.sort
+    all_migrations = out.lines(chomp: true).to_a.sort
 
     out = subprocess('git', 'diff', '--diff-filter=A', '--name-only', ref, '--', MIGRATIONS_DIR)
-    new_migrations = out.split("\n").to_a.sort
+    new_migrations = out.lines(chomp: true).to_a.sort
 
     starting_index = all_migrations.length - new_migrations.length
 
