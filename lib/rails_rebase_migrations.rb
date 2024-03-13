@@ -62,7 +62,7 @@ class RebaseMigrations
         # room between the migrations to inject new ones.
         now += 120
 
-        new_timestamp = Time.at(now).strftime(TIME_FORMAT)
+        new_timestamp = Time.at(now, in: 'Z').strftime(TIME_FORMAT)
         new_migration_name = "#{new_timestamp}#{migration_name_base}"
         subprocess('git', 'mv', path, "#{MIGRATIONS_DIR}#{new_migration_name}")
       end
