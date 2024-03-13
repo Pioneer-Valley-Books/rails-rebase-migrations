@@ -1,3 +1,7 @@
+## UNRELEASED
+
+Always write out the new migration timestamp in UTC.
+
 ## 1.1.0 (2024-03-04)
 
 Consider the timestamp of the latest migration as the initial value for rebased
