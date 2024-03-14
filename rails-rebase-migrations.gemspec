@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name = 'rails-rebase-migrations'
-  spec.version = '1.1.0'
+  spec.version = '1.2.0'
   spec.licenses = ['MIT']
   spec.summary = 'Rebase Rails migrations to be the latest'
   spec.authors = ['Pioneer Valley Books']

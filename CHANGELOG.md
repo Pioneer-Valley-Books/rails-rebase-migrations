@@ -1,4 +1,4 @@
-## UNRELEASED
+## 1.2.0 (2024-03-14)
 
 Always write out the new migration timestamp in UTC.
 
