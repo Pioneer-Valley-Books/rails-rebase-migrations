@@ -6,26 +6,11 @@ updates:
   - package-ecosystem: bundler
     directory: /
     schedule:
-      interval: weekly
-      day: sunday
-    allow:
-      - dependency-type: all
-    commit-message:
-      prefix: "Bundler Updates: "
-    versioning-strategy: lockfile-only
-    groups:
-      all-dependencies:
-        patterns:
-          - "*"
+      interval: daily
+    rebase-strategy: disabled
 
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
-      day: sunday
-    commit-message:
-      prefix: "GitHub Actions Updates: "
-    groups:
-      all-dependencies:
-        patterns:
-          - "*"
+      interval: daily
+    rebase-strategy: disabled
