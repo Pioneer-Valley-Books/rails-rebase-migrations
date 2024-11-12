@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     rails-rebase-migrations (1.2.0)
-      rails (>= 6.1, < 9)
+      rails (>= 6.1)
 
 GEM
   remote: https://rubygems.org/
