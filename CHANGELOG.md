@@ -1,3 +1,7 @@
+## 1.3.0 (2024-11-13)
+
+Add support for Rails 8.
+
 ## 1.2.0 (2024-03-14)
 
 Always write out the new migration timestamp in UTC.
