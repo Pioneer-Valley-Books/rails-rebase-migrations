@@ -71,6 +71,7 @@ class RebaseMigrations
     return if options[:check]
 
     # Regenerate db/schema.rb
+    system('git', 'checkout', ref, '--', 'db/schema.rb', exception: true)
     system('rails', 'db:drop', 'db:create', 'db:migrate', exception: true)
     subprocess('git', 'add', 'db/schema.rb')
   end

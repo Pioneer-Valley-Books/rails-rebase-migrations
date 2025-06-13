@@ -1,3 +1,8 @@
+## Unreleased
+
+Checkout previous version of `db/schema.rb` before re-applying migrations to
+avoid conflicts.
+
 ## 1.3.0 (2024-11-13)
 
 Add support for Rails 8.
