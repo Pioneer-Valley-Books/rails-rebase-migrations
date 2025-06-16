@@ -1,4 +1,4 @@
-## Unreleased
+## 1.4.0 (2025-06-16)
 
 Checkout previous version of `db/schema.rb` before re-applying migrations to
 avoid conflicts.
