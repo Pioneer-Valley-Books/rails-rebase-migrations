@@ -1,3 +1,7 @@
+## 1.5.0 (2026-02-05)
+
+Add support for rail-squash-migrations gem.
+
 ## 1.4.0 (2025-06-16)
 
 Checkout previous version of `db/schema.rb` before re-applying migrations to
